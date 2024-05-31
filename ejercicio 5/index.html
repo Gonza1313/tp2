@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de área de terrenos</title>
+</head>
+<body>
+    <h1>Cálculo de área de terrenos con forma de "A" y "B"</h1>
+
+    <form id="formularioTerreno">
+        <h2>Terreno con forma de "A"</h2>
+        <label for="ladoA">Lado A (en metros):</label>
+        <input type="number" id="ladoA" name="ladoA" required>
+
+        <label for="ladoB">Lado B (en metros):</label>
+        <input type="number" id="ladoB" name="ladoB" required>
+
+        <label for="altura">Altura (en metros):</label>
+        <input type="number" id="altura" name="altura" required>
+
+        <button type="button" onclick="calcularAreaA()">Calcular área</button>
+
+        <h2>Terreno con forma de "B"</h2>
+        <label for="baseB">Base (en metros):</label>
+        <input type="number" id="baseB" name="baseB" required>
+
+        <label for="alturaB">Altura (en metros):</label>
+        <input type="number" id="alturaB" name="alturaB" required>
+
+        <button type="button" onclick="calcularAreaB()">Calcular área</button>
+    </form>
+
+    <div id="resultados">
+        <h2>Resultados</h2>
+        <p id="areaA"></p>
+        <p id="areaB"></p>
+    </div>
+
+    <script>
+        function calcularAreaA() {
+            const ladoA = parseFloat(document.getElementById('ladoA').value);
+            const ladoB = parseFloat(document.getElementById('ladoB').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+
+            if (ladoA <= 0 || isNaN(ladoA) || ladoB <= 0 || isNaN(ladoB) || altura <= 0 || isNaN(altura)) {
+                mostrarError("Error: Ingrese valores válidos para los lados y la altura.");
+                return;
+            }
+
+            const area = (ladoA + ladoB) * altura / 2;
+            mostrarResultadoA(area);
+        }
+
+        function calcularAreaB() {
+            const base = parseFloat(document.getElementById('baseB').value);
+            const altura = parseFloat(document.getElementById('alturaB').value);
+
+            if (base <= 0 || isNaN(base) || altura <= 0 || isNaN(altura)) {
+                mostrarError("Error: Ingrese valores válidos para la base y la altura.");
+                return;
+            }
+
+            const area = base * altura;
+            mostrarResultadoB(area);
+        }
+
+        function mostrarResultadoA(area) {
+            const areaAElement = document.getElementById('areaA');
+            areaAElement.textContent = `Área del terreno con forma de "A": ${area.toFixed(2)} m²`;
+        }
+
+        function mostrarResultadoB(area) {
+            const areaBElement = document.getElementById('areaB');
+            areaBElement.textContent = `Área del terreno con forma de "B": ${area.toFixed(2)} m²`;
+        }
+
+        function mostrarError(mensaje) {
+            alert(mensaje);
+        }
+    </script>
+</body>
+</html>
