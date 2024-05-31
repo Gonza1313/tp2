@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de registro con validaciones</title>
+</head>
+<body>
+    <h1>Registro de persona</h1>
+
+    <form id="formularioRegistro">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required maxlength="50">
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required maxlength="50">
+
+        <label for="edad">Edad (en años):</label>
+        <input type="number" id="edad" name="edad" required min="1">
+
+        <label for="altura">Altura (en cm):</label>
+        <input type="number" id="altura" name="altura" required min="1" max="230">
+
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" name="correo" required>
+
+        <button type="button" onclick="validarRegistro()">Enviar</button>
+    </form>
+
+    <p id="resultadoRegistro"></p>
+
+    <script>
+        function validarRegistro() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const apellido = document.getElementById('apellido').value.trim();
+            const edad = parseInt(document.getElementById('edad').value);
+            const altura = parseInt(document.getElementById('altura').value);
+            const correo = document.getElementById('correo').value.trim();
+
+            let mensaje = '';
+            let valido = true;
+
+            if (nombre === '' || apellido === '') {
+                mensaje += 'Nombre y apellido son obligatorios.\n';
+                valido = false;
+            } else if (nombre.length > 50 || apellido.length > 50) {
+                mensaje += 'El nombre y apellido no pueden tener más de 50 caracteres.\n';
+                valido = false;
+            }
+
+            if (edad <= 0) {
+                mensaje += 'La edad debe ser un número positivo.\n';
+                valido = false;
+            } else if (edad < 18) {
+                mensaje += 'No se permiten menores de edad.\n';
+                valido = false;
+            }
+
+            if (altura <= 0 || altura > 230) {
+                mensaje += 'La altura debe ser un número entre 1 y 230 cm.\n';
+                valido = false;
+            }
+
+            if (correo === '') {
+                mensaje += 'El correo electrónico es obligatorio.\n';
+                valido = false;
+            } else if (!correo.includes('@')) {
+                mensaje += 'El correo electrónico debe incluir un "@".\n';
+                valido = false;
+            }
+
+            const resultadoElemento = document.getElementById('resultadoRegistro');
+
+            if (valido) {
+                mensaje = '¡Registro exitoso!';
+                resultadoElemento.style.color = 'green';
+            } else {
+                mensaje = 'Error en el registro:\n' + mensaje;
+                resultadoElemento.style.color = 'red';
+            }
+
+            resultadoElemento.textContent = mensaje;
+        }
+    </script>
+</body>
+</html>
