@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+</head>
+<body>
+    <h1>Calculadora de Índice de Masa Corporal (IMC)</h1>
+
+    <form id="formularioIMC">
+        <label for="estatura">Estatura (en centímetros):</label>
+        <input type="number" id="estatura" name="estatura" required>
+
+        <label for="peso">Peso (en kilogramos):</label>
+        <input type="number" id="peso" name="peso" required>
+
+        <button type="button" onclick="calcularIMC()">Calcular IMC</button>
+    </form>
+
+    <script>
+        function calcularIMC() {
+            const estaturaEnCm = parseFloat(document.getElementById('estatura').value);
+            const pesoEnKg = parseFloat(document.getElementById('peso').value);
+
+            if (estaturaEnCm <= 0 || isNaN(estaturaEnCm) || pesoEnKg <= 0 || isNaN(pesoEnKg)) {
+                alert("Error: Ingrese valores válidos para estatura y peso.");
+                return;
+            }
+
+            const alturaEnMetros = estaturaEnCm / 100;
+            const IMC = pesoEnKg / (alturaEnMetros * alturaEnMetros);
+
+            const resultado = `Su IMC es: ${IMC.toFixed(2)}`;
+            alert(resultado);
+        }
+    </script>
+</body>
+</html>
