@@ -1,0 +1,15 @@
+.usuario {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.tareasUsuario {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.tarea.completada {
+    text-decoration: line-through;
+    color: #0cee0c;
+}
